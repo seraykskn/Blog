@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+            <div class="navbar-collapse collapse navbar-right">
+                @if (Session["username"] == null)
+                {
+
+                    @Html.ActionLink("My Blog", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                else
+                {
+                    @Html.ActionLink("My Blog", "Index", "Kullanici", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Makaleler ", "Index", "Makale", new { area = "" }, new { @class = "navbar-brand" })
+                }
+            </div>
+            <div class="navbar-collapse collapse navbar-right">
+                @if (Session["username"] == null)
+                {
+                    @Html.ActionLink("Kayıt Ol", "Create", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Giriş Yap ", "Login", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                else
+                {
+                    @Html.ActionLink(Session["username"].ToString(), "Profil", "Kullanici", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Çıkış Yap", "Logout", "Kullanici", new { area = "" }, new { @class = "navbar-brand" })
+
+                }
+            </div>
+        </div>
+    </div>
+    
+    <style>
+        body, h1, h2, h3, h4, h5 {
+            font-family: "Raleway", sans-serif;
+        }
+    </style>
+    <body class="w3-light-grey">
+
+        <!-- w3-content defines a container for fixed size centered content,
+        and is wrapped around the whole page content, except for the footer in this example -->
+        <div class="w3-content" style="max-width:1400px">
+
+            <!-- Header -->
+            <header class="w3-container w3-center w3-padding-32">
+                <h1><b>MY BLOG</b></h1>
+                <p>Welcome to the blog of <span class="w3-tag">Seray</span></p>
+            </header>
+
+            <!-- Grid -->
+            <div class="w3-row">
+                <div class="w3-col l8 s12">
+                    <div class="w3-card-4 w3-margin w3-white">
+                        <div style="padding:20px 20px 20px 20px">
+                            @RenderBody()
+                        </div>
+                    </div>
+                    </hr>
+                    </div>
+                    <div class="w3-col l4">
+                        <!-- About Card -->
+                        <div class="w3-card w3-margin w3-margin-top">
+                            <div class="w3-container w3-white">
+                                <h4><b>Seray</b></h4>
+                                <p>Learn, Share, Build</p>
+                            </div>
+                        </div><hr>
+
+                        <!-- Posts -->
+                        <div class="w3-card w3-margin">
+                            <div class="w3-container w3-padding">
+                                <h4>Popular Posts</h4>
+                            </div>
+                            <ul class="w3-ul w3-hoverable w3-white">
+                                <li class="w3-padding-16">
+                                    <a href="https://www.crocs.com.tr/urun/crocband-kaldirim-tasi-ceviz/"><img src="https://www.crocs.com.tr/wp-content/uploads/2019/04/11016_2T5_ALT100.jpg"
+                                    alt="Image" class="w3-left w3-margin-right" style="width:50px" ></a>
+                                   
+                                    <span class="w3-large">Crocs</span><br>
+                                    <span>Yeni Modeller Burada</span>
+                                </li>
+                                <li class="w3-padding-16">
+                                    <a href="https://www.crocs.com.tr/urun/crocband-sport-cord-clog-k/"><img src="https://www.crocs.com.tr/wp-content/uploads/2020/02/205899_669_ALT100.jpg"
+                                             alt="Image" class="w3-left w3-margin-right" style="width:50px">
+                                    </a>
+
+                                    <span class="w3-large">Crocs</span><br>
+                                    <span>Yeni Modeller Burda</span>
+                                </li>
+                                <li class="w3-padding-16">
+                                    <a href="https://www.crocs.com.tr/urun/crocband-multigraphic-clog-k-buz-mavisi/"><img src="https://www.crocs.com.tr/wp-content/uploads/2019/04/205532_4O9_ALT100.jpg"
+                                             alt="Image" class="w3-left w3-margin-right" style="width:50px">
+                                    </a>
+
+                                    <span class="w3-large">Crocs</span><br>
+                                    <span>Yeni Modeller Burada</span>
+                                </li>
+                                <li class="w3-padding-16 w3-hide-medium w3-hide-small">
+                                    <a href="https://www.crocs.com.tr/urun/crocband-acik-gri-lacivert/"><img src="https://www.crocs.com.tr/wp-content/uploads/2019/04/11016_01U_ALT100.jpg"
+                                             alt="Image" class="w3-left w3-margin-right" style="width:50px">
+                                    </a>
+
+                                    <span class="w3-large">Crocs</span><br>
+                                    <span>Yeni Modeller Burada</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <hr>
+
+                        <!-- Labels / tags -->
+                        <div class="w3-card w3-margin">
+                            <div class="w3-container w3-padding">
+                                <h4>Tags</h4>
+                            </div>
+                            <div class="w3-container w3-white">
+                                <p>
+                                    <span class="w3-tag w3-black w3-margin-bottom">Travel</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">New York</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">London</span>
+                                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">IKEA</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">NORWAY</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">DIY</span>
+                                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Ideas</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Baby</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Family</span>
+                                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">News</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Clothing</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Shopping</span>
+                                    <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Sports</span> <span class="w3-tag w3-light-grey w3-small w3-margin-bottom">Games</span>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- END Introduction Menu -->
+                    </div>
+
+                    <!-- END GRID -->
+                </div><br>
+
+                <!-- END w3-content -->
+            </div>
+            <div class="container body-content">
+               
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - Bloğum</p>
+                </footer>
+            </div>
+
+            <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+            <script src="~/Scripts/bootstrap.min.js"></script>
+            @RenderSection("Scripts", required: false)
+
+</body>
+</html>

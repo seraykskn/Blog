@@ -1,0 +1,26 @@
+﻿@model IEnumerable<mvcBlog.Models.Yorum>
+
+
+@foreach (var item in Model)
+{
+
+    @Html.DisplayFor(modelItem => item.Kullanici.kullaniciAdi)
+
+    <br />
+
+    @Html.DisplayFor(modelItem => item.YorumIcerik)
+    <br />
+
+    @Html.DisplayFor(modelItem => item.tarih)
+    <br />
+
+    if (item.Kullanici.kullaniciAdi == Session["username"].ToString())
+    {
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.id })
+        </p>
+    }
+    
+ }
+

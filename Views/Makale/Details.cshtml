@@ -1,0 +1,105 @@
+﻿@model mvcBlog.Models.Makale
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class=" text-danger text-center">@Model.Baslik</h2>
+
+<div>
+    <h4>@Model.Kullanici.kullaniciAdi</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Kategoriler.kategoriAdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Kategoriler.kategoriAdi)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.tarih)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tarih)
+        </dd>
+
+       
+        <dt>
+            @Html.DisplayNameFor(model => model.Baslik)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Baslik)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Icerik)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Icerik)
+        </dd>
+        <dt>
+           <p> @Session["username"].ToString()</p>
+        </dt>
+
+        <dd>
+            <p> @Model.Kullanici.kullaniciAdi</p>
+        </dd>
+
+    
+
+    </dl>
+</div>
+@if(Model.Kullanici.kullaniciAdi==Session["username"].ToString())
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Etiket Ekle", "Edit", new {id=Model.id })
+        
+    </p>
+}
+<br/>
+<div>
+    <textarea type="Text" id="yorum"></textarea>
+    <br/>
+
+    <input type="submit" value="Yorum Yap" class="btn-danger" id="YorumYap">
+</div>
+@Html.Partial("YorumListele", Model.Yorums.ToList())
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(function () {
+            $("#YorumYap").click(function () {
+                var yorumunuz = $("#yorum").val();
+                $.ajax(
+                    {
+                        url: '/Makale/YorumYap/',
+                        data: { yorum: yorumunuz, MakaleId:@Model.id },
+                        type: 'POST',
+                        dataType: 'json',
+                        success: function (data) {
+                           
+                            alert("Başarı!");
+
+                        },
+                         error: function (data) {
+                            alert("Sorun Oluştu");
+
+                        }
+                    });
+            });
+        })
+    </script>
+}
+
+<p>
+   
+    @Html.ActionLink("Back to List", "Index")
+</p>
